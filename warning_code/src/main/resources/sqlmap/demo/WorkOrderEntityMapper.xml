@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.demo.WorkOrderEntityMapper" >
+  <resultMap id="BaseResultMap" type="com.entity.WorkOrderEntity" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="business_type" property="businessType" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="VARCHAR"/>
+    <result column="business_no" property="businessNo" jdbcType="VARCHAR" />
+    <result column="current_step" property="currentStep" jdbcType="INTEGER" />
+    <result column="from_department_id" property="fromDepartmentId" jdbcType="VARCHAR" />
+    <result column="to_department_id" property="toDepartmentId" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    id, create_time, update_time, business_type, state, business_no, current_step, from_department_id, to_department_id
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from work_order
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <update id="updateByPrimaryKey" parameterType="com.entity.WorkOrderEntity" >
+    update work_order
+    set
+      business_type = #{businessType,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      business_no = #{businessNo,jdbcType=VARCHAR},
+      current_step = #{currentStep,jdbcType=INTEGER},
+      from_department_id = #{fromDepartmentId,jdbcType=VARCHAR},
+      to_department_id = #{toDepartmentId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+</mapper>
